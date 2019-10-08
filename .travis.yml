@@ -6,19 +6,16 @@ python:
       
 matrix:
   include:
-    - env:
-        - TOXENV=py36
-      python: '3.6'
-    - env:
-        - TOXENV=py37
-      python: '3.7'
-    - stage: tox
+  - python: '3.6'
+    env: TOXENV=py36
+  - python: '3.7'
+    env: TOXENV=py37
+  - stage: tox
     install:
       - python -mpip install --progress-bar=off tox-travis -rci/requirements.txt
     script:
       - tox -v
-    - stage: test
-      python: '3.7'
+  - stage: test
     install:
       - pipenv install --dev --ignore-pipfile --deploy
     before_script: # code coverage tool
@@ -29,6 +26,6 @@ matrix:
     after_script:
       - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
- stages:
+stages:
   - test
   - tox

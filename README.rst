@@ -11,16 +11,21 @@ Overview
       - | |travis|
         |
         | |codeclimate|
+		|
+		| |testcoverage|
     * - package
       - | |commits-since|
 
-.. |travis| image:: https://api.travis-ci.org/csci-e-29/2019fa-csci-utils-patchcasey.svg?branch=master
-    :alt: Travis-CI Build Status
-    :target: https://travis-ci.org/csci-e-29/2019fa-csci-utils-patchcasey
+.. |travis| image:: https://travis-ci.com/csci-e-29/2019fa-csci-utils-patchcasey.svg?token=5ichzqk8s8tsSTcNuNkm&branch=master
+    :target: https://travis-ci.com/csci-e-29/2019fa-csci-utils-patchcasey
 
-.. |codeclimate| image:: https://codeclimate.com/github/csci-e-29/2019fa-csci-utils-patchcasey/badges/gpa.svg
-   :target: https://codeclimate.com/github/csci-e-29/2019fa-csci-utils-patchcasey
-   :alt: CodeClimate Quality Status
+.. |codeclimate| image:: https://api.codeclimate.com/v1/badges/e5a3830befdc2563f359/maintainability
+   :target: https://codeclimate.com/repos/5d9bf8d11ab6bd01b800cb46/maintainability
+   :alt: Maintainability
+   
+.. |testcoverage| image:: https://api.codeclimate.com/v1/badges/e5a3830befdc2563f359/test_coverage
+   :target: https://codeclimate.com/repos/5d9bf8d11ab6bd01b800cb46/test_coverage
+   :alt: Test Coverage
 
 .. |commits-since| image:: https://img.shields.io/github/commits-since/csci-e-29/2019fa-csci-utils-patchcasey/v0.0.0.svg
     :alt: Commits since latest release

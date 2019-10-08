@@ -1,5 +1,9 @@
 # CSCI Utils
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/e5a3830befdc2563f359/maintainability)](https://codeclimate.com/repos/5d9bf8d11ab6bd01b800cb46/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/e5a3830befdc2563f359/test_coverage)](https://codeclimate.com/repos/5d9bf8d11ab6bd01b800cb46/test_coverage)
+[![Build Status](https://travis-ci.com/csci-e-29/2019fa-csci-utils-patchcasey.svg?token=5ichzqk8s8tsSTcNuNkm&branch=master)](https://travis-ci.com/csci-e-29/2019fa-csci-utils-patchcasey)
+
 Common utilities for CSCI E-29 psets
 
 A common practice is to keep work for every problem you solve in its own repo or

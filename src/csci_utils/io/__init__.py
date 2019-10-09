@@ -2,6 +2,7 @@
 # without exposing them publicly or to avoid naming conflicts!
 from atomicwrites import atomic_write as _backend_writer, AtomicWriter
 from contextlib import contextmanager
+import tempfile
 
 # You probably need to inspect and override some internals of the package
 class SuffixWriter(AtomicWriter):

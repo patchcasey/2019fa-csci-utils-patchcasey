@@ -7,6 +7,7 @@ verify_ssl = true
 
 [packages]
 csci-utils = {editable = true,path = "."}
+setuptools-scm = "*"
 
 [requires]
 python_version = "3.7"

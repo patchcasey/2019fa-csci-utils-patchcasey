@@ -26,9 +26,8 @@ def read(*names, **kwargs):
 setup(
     name='csci-utils',
     use_scm_version={
-        'local_scheme': 'dirty-tag',
+        # 'local_scheme': 'dirty-tag',
         'write_to': 'src/csci_utils/_version.py',
-        'fallback_version': '0.0.0',
     },
     description='Utils problemset',
     long_description='%s\n%s' % (

@@ -10,7 +10,7 @@ matrix:
     python: '3.6'
     stage: tox
     install:
-      -python -mpip install --progress-bar=off tox-travis -rci/requirements.txt
+      - python -mpip install --progress-bar=off tox-travis -rci/requirements.txt
     script:
       - tox -v
   - env:
@@ -18,7 +18,7 @@ matrix:
     python: '3.7'
     stage: tox
     install:
-      -python -mpip install --progress-bar=off tox-travis -rci/requirements.txt
+      - python -mpip install --progress-bar=off tox-travis -rci/requirements.txt
     script:
       - tox -v
   - stage: test

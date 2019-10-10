@@ -9,7 +9,7 @@ matrix:
   - python: '3.7'
     env: TOXENV=py37
     install:
-      - python -mpip install --progress-bar=off tox-travis
+      - python -mpip install --progress-bar=off tox-travis -ci/requirements.txt
     script:
       - tox -v
   - stage: test

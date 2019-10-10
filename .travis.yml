@@ -13,6 +13,14 @@ matrix:
       -python -mpip install --progress-bar=off tox-travis -rci/requirements.txt
     script:
       - tox -v
+  - env:
+      - TOXENV=py37
+    python: '3.7'
+    stage: tox
+    install:
+      -python -mpip install --progress-bar=off tox-travis -rci/requirements.txt
+    script:
+      - tox -v
   - stage: test
     python: '3.7'
     install:

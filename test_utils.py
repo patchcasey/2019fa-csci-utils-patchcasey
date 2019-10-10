@@ -9,7 +9,7 @@ from unittest import TestCase
 import pandas as pd
 import tempfile
 
-from atomicwrites import atomic_write
+from csci_utils.io import atomic_write
 
 # from pset_1.hash_str import hash_str, str_to_byte, get_csci_salt
 # from pset_1.io import atomic_write
@@ -94,31 +94,22 @@ class AtomicWriteTests(TestCase):
             assert not os.path.exists(tmpfile)
             assert not os.path.exists(fp)
 
-    def check_suffix(self):
+    def test_check_suffix(self):
         """check to make sure file has suffix"""
 
         file_suffix = '.txt'
         file_name = 'asdf'
         full_file_name = file_name + file_suffix
+
         with TemporaryDirectory() as tmp:
             fp = os.path.join(tmp, full_file_name)
-            print(fp)
 
             with atomic_write(fp) as f:
-                print(f)
                 assert not os.path.exists(fp)
                 tmpfile = f.name
-                f.write("asdf")
-                try:
-                    temp_string = tmpfile.split('.')
-                    _suffix = temp_string[1]
-                except:
-                    raise AttributeError
+                root, ext = os.path.splitext(tmpfile)
 
-            assert not os.path.exists(tmpfile)
-            assert os.path.exists(fp)
-
-        self.assertEqual(_suffix, full_file_name)
+        self.assertEqual(ext, file_suffix)
 
     def test_file_exists(self):
         """Ensure an error is raised when a file exists"""

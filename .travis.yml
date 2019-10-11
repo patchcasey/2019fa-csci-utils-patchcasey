@@ -1,22 +1,28 @@
 language: python
 dist: xenial
-python: 
+python:
   - 3.7
-  - 3.6
       
 matrix:
   include:
-    - python: 3.6
-      env: TOXENV=py36
-    - python: 3.7
-      env: TOXENV=py37 
-    -  stage: tox
+  - env:
+      - TOXENV=py36
+    python: '3.6'
+    stage: tox
     install:
-      - pip install tox-travis
+      - python -m pip install tox-travis -r ci/requirements.txt
     script:
-      - tox
-    - stage: test
-      python: '3.7'
+      - tox -v
+  - env:
+      - TOXENV=py37
+    python: '3.7'
+    stage: tox
+    install:
+      - python -m pip install tox-travis -r ci/requirements.txt
+    script:
+      - tox -v
+  - stage: test
+    python: '3.7'
     install:
       - pipenv install --dev --ignore-pipfile --deploy
     before_script: # code coverage tool
@@ -27,6 +33,6 @@ matrix:
     after_script:
       - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
- stages:
+stages:
   - test
   - tox

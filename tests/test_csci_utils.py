@@ -13,13 +13,15 @@ from csci_utils.hash_str.hash_str import hash_str, str_to_byte, get_csci_salt
 from csci_utils.hash_str import call_getuserid, parquet_conv
 from csci_utils.io import atomic_write
 
+
 class FakeFileFailure(IOError):
     pass
 
 
 class Main_Tests(TestCase):
     def test_parquet_conv(self):
-        # with tempfile.TemporaryDirectory() as tempdirname:
+        """Ensures parquet converter works with 2 filetypes
+        and returns correct parquetfile"""
         df = pd.DataFrame({"hashed_id": [1, 2, 3, 4, 5]})
         for x in [".csv", ".xlsx"]:
             tf = tempfile.NamedTemporaryFile(delete=False, dir=os.getcwd(), suffix=x)
@@ -38,6 +40,8 @@ class HashTests(TestCase):
         self.count = 0
 
     def test_decorator(self):
+        """Ensures str_to_byte turns strings into bytes"""
+
         @str_to_byte
         def a(x, y):
             if isinstance(x, bytes):
@@ -50,9 +54,11 @@ class HashTests(TestCase):
         self.assertEqual(a("test", "test"), "expected result")
 
     def test_basic(self):
+        """Ensures hash_str handles the example hashing correctly"""
         self.assertEqual(hash_str("world!", salt="hello, ").hex()[:6], "68e656")
 
     def test_getcsci(self):
+        """Ensure test_getcsci function can return an example environmental variable"""
         os.environ["test_envvar"] = "yes"
         environ_var = get_csci_salt(keyword="test_envvar", convert_to_bytes="no")
         self.assertEqual(environ_var, "yes")
@@ -95,8 +101,8 @@ class AtomicWriteTests(TestCase):
     def test_check_suffix(self):
         """check to make sure file has suffix"""
 
-        file_suffix = '.txt'
-        file_name = 'asdf'
+        file_suffix = ".txt"
+        file_name = "asdf"
         full_file_name = file_name + file_suffix
 
         with TemporaryDirectory() as tmp:

@@ -6,13 +6,22 @@ import os
 
 
 def get_user_hash(username, salt=None):
+    """changes str github username into hashed username with appropriate salt
 
+    :param username: str github username
+    :param salt: salt
+    :return: returns hashed username
+    """
     salt = salt or get_csci_salt()
     print(salt)
     return hash_str(username, salt=salt)
 
 
 def call_getuserid():
+    """Keeping this functionality from Pset instructions
+
+    :return: str
+    """
     for user in [
         get_csci_salt("USER_1", convert_to_bytes="No"),
         get_csci_salt("USER_2", convert_to_bytes="No"),
@@ -21,6 +30,13 @@ def call_getuserid():
 
 
 def parquet_conv(filename, cwd=os.getcwd(), datasourceformat=".xlsx"):
+    """Converts a file of .xlsx or .csv into .parquet and reads prints/returns the first column
+
+    :param filename: base filename to be converted to .parquet
+    :param cwd: current working directory
+    :param datasourceformat: what format the datasource comes in
+    :return: the requested column from pset instructions
+    """
     parquetfilename = filename + ".parquet"
     data_wd = os.path.abspath(os.path.join(cwd, "data"))
     data_source = os.path.join(data_wd, filename + datasourceformat)
@@ -35,15 +51,3 @@ def parquet_conv(filename, cwd=os.getcwd(), datasourceformat=".xlsx"):
     )
     print(result)
     return result
-
-
-if __name__ == "__main__":
-    call_getuserid()
-    parquet_conv(filename="hashed")
-
-    # print(df.dtypes)
-    # parquetfile = df.to_parquet('hashed.parquet', engine='fastparquet', compression='GZIP', index=False)
-    # print(type(parquetfile))
-    # result = pd.read_parquet(parquetfile, engine='fastparquet', columns='hashed_id')
-
-    # TODO: read in, save as new parquet file, read back just id column, print

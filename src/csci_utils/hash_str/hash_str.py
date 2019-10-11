@@ -23,6 +23,12 @@ def str_to_byte(func):
 
 
 def get_csci_salt(keyword="CSCI_SALT", convert_to_bytes="yes") -> bytes:
+    """
+
+    :param keyword: str to call environmental variable
+    :param convert_to_bytes: whether to convert to bytes or not
+    :return: returns bytes format of environmental variable
+    """
     """Returns the appropriate salt for CSCI E-29"""
 
     salt_hex = os.getenv(keyword)

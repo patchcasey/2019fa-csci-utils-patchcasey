@@ -37,7 +37,7 @@ def exec_in_env():
             except subprocess.CalledProcessError:
                 check_call(["virtualenv", env_path])
         print("Installing `jinja2` into bootstrap environment...")
-        check_call([join(bin_path, "pip"), "install", "jinja2", "tox"])
+        check_call([join(bin_path, "pip"), "install", "jinja2", "tox", "setuptools_scm"])
     python_executable = join(bin_path, "python")
     if not os.path.exists(python_executable):
         python_executable += '.exe'

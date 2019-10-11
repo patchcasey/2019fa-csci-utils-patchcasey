@@ -9,55 +9,53 @@ from unittest import TestCase
 import pandas as pd
 import tempfile
 
+from csci_utils.hash_str.hash_str import hash_str, str_to_byte, get_csci_salt
+from csci_utils.hash_str import call_getuserid, parquet_conv
 from csci_utils.io import atomic_write
-
-# from pset_1.hash_str import hash_str, str_to_byte, get_csci_salt
-# from pset_1.io import atomic_write
-# from pset_1.__main__ import call_getuserid, parquet_conv
-
 
 class FakeFileFailure(IOError):
     pass
 
 
-# class Main_Tests(TestCase):
-#     def test_parquet_conv(self):
-#         # with tempfile.TemporaryDirectory() as tempdirname:
-#         df = pd.DataFrame({"hashed_id": [1, 2, 3, 4, 5]})
-#         tf = tempfile.NamedTemporaryFile(delete=False, dir=os.getcwd(), suffix=".csv")
-#         tf.close()
-#         with open(tf.name) as temp:
-#             df.to_csv(temp.name + ".csv")
-#             result = parquet_conv(
-#                 filename=temp.name, cwd=os.getcwd(), datasourceformat=".csv"
-#             )
-#             print(result)
-#             pd.testing.assert_frame_equal(df, result)
-#
-#
-# class HashTests(TestCase):
-#     def setUp(self):
-#         self.count = 0
-#
-#     def test_decorator(self):
-#         @str_to_byte
-#         def a(x, y):
-#             if isinstance(x, bytes):
-#                 self.count += 1
-#             if isinstance(y, bytes):
-#                 self.count += 1
-#             if self.count == 2:
-#                 return "expected result"
-#
-#         self.assertEqual(a("test", "test"), "expected result")
-#
-#     def test_basic(self):
-#         self.assertEqual(hash_str("world!", salt="hello, ").hex()[:6], "68e656")
-#
-#     def test_getcsci(self):
-#         os.environ["test_envvar"] = "yes"
-#         environ_var = get_csci_salt(keyword="test_envvar", convert_to_bytes="no")
-#         self.assertEqual(environ_var, "yes")
+class Main_Tests(TestCase):
+    def test_parquet_conv(self):
+        # with tempfile.TemporaryDirectory() as tempdirname:
+        df = pd.DataFrame({"hashed_id": [1, 2, 3, 4, 5]})
+        for x in [".csv", ".xlsx"]:
+            tf = tempfile.NamedTemporaryFile(delete=False, dir=os.getcwd(), suffix=x)
+            tf.close()
+            with open(tf.name) as temp:
+                df.to_csv(temp.name + x)
+                result = parquet_conv(
+                    filename=temp.name, cwd=os.getcwd(), datasourceformat=x
+                )
+                print(result)
+                pd.testing.assert_frame_equal(df, result)
+
+
+class HashTests(TestCase):
+    def setUp(self):
+        self.count = 0
+
+    def test_decorator(self):
+        @str_to_byte
+        def a(x, y):
+            if isinstance(x, bytes):
+                self.count += 1
+            if isinstance(y, bytes):
+                self.count += 1
+            if self.count == 2:
+                return "expected result"
+
+        self.assertEqual(a("test", "test"), "expected result")
+
+    def test_basic(self):
+        self.assertEqual(hash_str("world!", salt="hello, ").hex()[:6], "68e656")
+
+    def test_getcsci(self):
+        os.environ["test_envvar"] = "yes"
+        environ_var = get_csci_salt(keyword="test_envvar", convert_to_bytes="no")
+        self.assertEqual(environ_var, "yes")
 
 
 class AtomicWriteTests(TestCase):

@@ -11,6 +11,7 @@ pytest-cov = "*"
 csci-utils = {editable = true,path = "."}
 setuptools-scm = "*"
 pandas = "*"
+fastparquet = "*"
 
 [requires]
 python_version = "3.7"

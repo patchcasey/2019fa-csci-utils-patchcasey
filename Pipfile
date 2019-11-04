@@ -12,6 +12,7 @@ csci-utils = {editable = true,path = "."}
 setuptools-scm = "*"
 pandas = "*"
 fastparquet = "*"
+luigi = "*"
 
 [requires]
 python_version = "3.7"

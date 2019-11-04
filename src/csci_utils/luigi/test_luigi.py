@@ -2,7 +2,7 @@ from unittest import TestCase
 import os
 import io
 import tempfile
-from src.csci_utils.luigi.target import suffix_preserving_atomic_file, BaseAtomicProviderLocalTarget, SuffixPreservingLocalTarget
+from .target import suffix_preserving_atomic_file, SuffixPreservingLocalTarget
 from luigi import Task, format
 from luigi.mock import MockTarget, MockFileSystem
 

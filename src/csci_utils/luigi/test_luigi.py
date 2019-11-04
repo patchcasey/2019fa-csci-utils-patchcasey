@@ -2,8 +2,8 @@ from unittest import TestCase
 import os
 import io
 import tempfile
-from .target import suffix_preserving_atomic_file, SuffixPreservingLocalTarget
-from luigi import Task, format
+from .__init__ import suffix_preserving_atomic_file, SuffixPreservingLocalTarget
+from luigi import Task
 from luigi.mock import MockTarget, MockFileSystem
 
 class SimpleTask(Task):
@@ -50,9 +50,5 @@ class Luigi_Tests(TestCase):
         temporary = tempfile.NamedTemporaryFile(suffix=_suffix)
         mockfilesystem = MockFileSystem()
         mocktarget = MockTarget(mockfilesystem)
-        print(mocktarget.path)
         x = SuffixPreservingLocalTarget(temporary.name)
-        print(x.path)
 
-        # y = x.open(mocktarget.open().name())
-        # print(y)

@@ -2,18 +2,9 @@ from unittest import TestCase
 import os
 import io
 import tempfile
-from .__init__ import suffix_preserving_atomic_file, SuffixPreservingLocalTarget
-from luigi import Task
+from csci_utils.luigi import suffix_preserving_atomic_file, SuffixPreservingLocalTarget
 from luigi.mock import MockTarget, MockFileSystem
 
-class SimpleTask(Task):
-    def output(self):
-        return MockFile("SimpleTask", mirror_on_stderr=True)
-
-    def run(self):
-        _out = self.output().open('w')
-        _out.write(u"Hello World!\n")
-        _out.close()
 
 class Luigi_Tests(TestCase):
     def test_temppath(self):

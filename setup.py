@@ -23,7 +23,7 @@ def read(*names, **kwargs):
 
 
 setup(
-    name="csci-utils",
+    name="csci_utils",
     use_scm_version={
         # 'local_scheme': 'dirty-tag',
         "write_to": "src/csci_utils/_version.py"
@@ -86,5 +86,5 @@ setup(
         #   ':python_version=="2.6"': ['argparse'],
     },
     setup_requires=["setuptools_scm>=3.3.1"],
-    entry_points={"console_scripts": ["csci-utils = csci_utils.cli:main"]},
+    entry_points={"console_scripts": ["csci_utils = csci_utils.cli:main"]},
 )

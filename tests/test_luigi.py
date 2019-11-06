@@ -4,9 +4,10 @@ import io
 import tempfile
 from csci_utils.luigi import suffix_preserving_atomic_file, SuffixPreservingLocalTarget
 from luigi.mock import MockTarget, MockFileSystem
+from luigi.format import Nop
 
 
-class Luigi_Tests(TestCase):
+class Luigi_Suffix_Tests(TestCase):
     def test_temppath(self):
         _suffix = ".pth"
         pathobj = tempfile.NamedTemporaryFile(suffix=_suffix)
@@ -17,11 +18,18 @@ class Luigi_Tests(TestCase):
             suff = "." + suff
             self.assertEqual(suff, _suffix)
 
-    def test_SuffixPreservingLocalTarget_open(self):
+    def test_SuffixPreservingLocalTarget_open_r(self):
         _suffix = ".pth"
         temporary = tempfile.NamedTemporaryFile(suffix=_suffix)
         x = SuffixPreservingLocalTarget(temporary.name)
-        self.assertIsInstance(x.open(), io.TextIOWrapper)
+        print(x.open(mode="r"))
+        self.assertIsInstance(x.open(mode="r"), io.TextIOWrapper)
+
+    def test_SuffixPreservingLocalTarget_open_w(self):
+        _suffix = ".pth"
+        temporary = tempfile.NamedTemporaryFile(suffix=_suffix)
+        x = SuffixPreservingLocalTarget(temporary.name)
+        self.assertIsInstance(x.open(mode="w"), io.TextIOWrapper)
 
     def test_SuffixPreservingLocalTarget_temporary_path(self):
         _suffix_list = [".pth", ".npy.gz", ".csv", ".this.that.test.example"]
@@ -42,4 +50,22 @@ class Luigi_Tests(TestCase):
         mockfilesystem = MockFileSystem()
         mocktarget = MockTarget(mockfilesystem)
         x = SuffixPreservingLocalTarget(temporary.name)
+
+from csci_utils.luigi import ContentImage, SavedModel
+from luigi.contrib.s3 import S3Target
+
+class Luigi_Download_Tests(TestCase):
+    def test_ContentImage(self):
+
+        x = ContentImage
+        x.IMAGE_ROOT = "test_directory"
+        x.image = "testfile.file"
+
+        y = SavedModel
+        y.MODEL_ROOT = "test"
+        y.model = "test"
+
+        self.assertEqual(type(x.output(self,format="whatever")), S3Target)
+        self.assertEqual(type(y.output(self,format="whatever")), S3Target)
+
 

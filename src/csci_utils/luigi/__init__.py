@@ -44,7 +44,7 @@ class BaseAtomicProviderLocalTarget(LocalTarget):
 class SuffixPreservingLocalTarget(BaseAtomicProviderLocalTarget):
     atomic_provider = suffix_preserving_atomic_file
 
-image_name = "Waluigi.jpeg"
+image_name = "luigi.jpeg"
 model_name = "udnie.pth"
 IMAGE_ROOT = 's3://pset4data/pset_4/images'
 MODEL_ROOT = 's3://pset4data/pset_4/saved_models'
@@ -52,7 +52,7 @@ S3_ROOT = 's3://pset4data/'
 LOCAL_ROOT = os.path.abspath('data')
 SHARED_RELATIVE_PATH = 'saved_models'
 
-
+#TODO - update this to be more generalized and not hardcoded???
 class ContentImage(ExternalTask):
     IMAGE_ROOT = IMAGE_ROOT # Root S3 path, as a constant
 

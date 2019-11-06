@@ -92,7 +92,7 @@ class DownloadModel(Task):
         targetpath = os.path.join(os.getcwd(), 'data/')
         target = os.path.join(targetpath, model_name)
 
-        return LocalTarget(target, format=format.Nop)
+        return LocalTarget(target, format=Nop)
 
     def run(self):
         # Use self.output() and self.input() targets to atomically copy
@@ -117,7 +117,7 @@ class DownloadImage(Task):
         targetpath = os.path.join(os.getcwd(), 'data/')
         target = os.path.join(targetpath, image_name)
 
-        return LocalTarget(target, format=format.Nop)
+        return LocalTarget(target, format=Nop)
 
     # TODO - replace with atomicwrite
     def run(self):

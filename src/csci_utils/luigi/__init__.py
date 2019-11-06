@@ -5,6 +5,7 @@ from luigi.format import FileWrapper
 from contextlib import contextmanager
 from luigi import Task, ExternalTask, Parameter
 from luigi.contrib.s3 import S3Target
+from luigi import format.Nop
 
 
 class suffix_preserving_atomic_file(atomic_file):

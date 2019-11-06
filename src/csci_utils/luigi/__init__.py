@@ -58,11 +58,12 @@ class ContentImage(ExternalTask):
     # Name of the image
     image = Parameter(image_name)  # Filename of the image under the root s3 path
 
-    def output(self, format):
-        if format:
-            return S3Target(IMAGE_ROOT + "/" + image_name)  # return the S3Target of the image
-        else:
-            return S3Target(IMAGE_ROOT + "/" + image_name, format=format.Nop)  # return the S3Target of the image
+    def output(self):
+        # TODO - leaving in as potential thing to bring back?
+        # if format:
+        #     return S3Target(IMAGE_ROOT + "/" + image_name)  # return the S3Target of the image
+        # else:
+        return S3Target(IMAGE_ROOT + "/" + image_name, format=format.Nop)  # return the S3Target of the image
 
 
 class SavedModel(ExternalTask):
@@ -70,11 +71,8 @@ class SavedModel(ExternalTask):
 
     model = Parameter(model_name) # Filename of the model
 
-    def output(self, format):
-        if format:
-            return S3Target(MODEL_ROOT + "/" + model_name) # return the S3Target of the model
-        else:
-            return S3Target(MODEL_ROOT + "/" + model_name, format=format.Nop)
+    def output(self):
+        return S3Target(MODEL_ROOT + "/" + model_name, format=format.Nop)
 
 
 class DownloadModel(Task):

@@ -47,7 +47,7 @@ class SuffixPreservingLocalTarget(BaseAtomicProviderLocalTarget):
 image_name = "Waluigi.jpeg"
 model_name = "udnie.pth"
 IMAGE_ROOT = 's3://pset4data/pset_4/images'
-MODEL_ROOT = 's3://pset4data/pset_4/saved_models/'
+MODEL_ROOT = 's3://pset4data/pset_4/saved_models'
 S3_ROOT = 's3://pset4data/'
 LOCAL_ROOT = os.path.abspath('data')
 SHARED_RELATIVE_PATH = 'saved_models'

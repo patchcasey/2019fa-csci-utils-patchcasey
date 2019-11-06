@@ -5,7 +5,7 @@ from luigi.format import FileWrapper
 from contextlib import contextmanager
 from luigi import Task, ExternalTask, Parameter
 from luigi.contrib.s3 import S3Target
-from luigi import format.Nop
+from luigi.format import Nop
 
 
 class suffix_preserving_atomic_file(atomic_file):
@@ -64,7 +64,7 @@ class ContentImage(ExternalTask):
         # if format:
         #     return S3Target(IMAGE_ROOT + "/" + image_name)  # return the S3Target of the image
         # else:
-        return S3Target(IMAGE_ROOT + "/" + image_name, format=format.Nop)  # return the S3Target of the image
+        return S3Target(IMAGE_ROOT + "/" + image_name, format=Nop)  # return the S3Target of the image
 
 
 class SavedModel(ExternalTask):
@@ -73,7 +73,7 @@ class SavedModel(ExternalTask):
     model = Parameter(model_name) # Filename of the model
 
     def output(self):
-        return S3Target(MODEL_ROOT + "/" + model_name, format=format.Nop)
+        return S3Target(MODEL_ROOT + "/" + model_name, format=Nop)
 
 
 class DownloadModel(Task):

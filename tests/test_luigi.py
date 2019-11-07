@@ -51,21 +51,50 @@ class Luigi_Suffix_Tests(TestCase):
         mocktarget = MockTarget(mockfilesystem)
         x = SuffixPreservingLocalTarget(temporary.name)
 
-from csci_utils.luigi import ContentImage, SavedModel
+from csci_utils.luigi import ContentImage, SavedModel, DownloadModel, DownloadImage
 from luigi.contrib.s3 import S3Target
 
-# class Luigi_Download_Tests(TestCase):
-#     def test_ContentImage(self):
-#
-#         x = ContentImage
-#         x.IMAGE_ROOT = "test_directory"
-#         x.image = "testfile.file"
-#
-#         y = SavedModel
-#         y.MODEL_ROOT = "test"
-#         y.model = "test"
-#
-#         self.assertEqual(type(x.output(self,format="whatever")), S3Target)
-#         self.assertEqual(type(y.output(self,format="whatever")), S3Target)
+class sub_DownloadModel(DownloadModel):
+    def __init__(self):
+        self.path = path
+
+    def requires(self):
+        # _x = tempfile.NamedTemporaryFile(mode="w+b",delete=False)
+        # # with _x as temporaryfile:
+        # #     temporaryfile.write(b"cool")
+        # return _x
+        f = S3Target(path = 'test', format=Nop)
+        return f
+
+    def output(self):
+        _x = tempfile.NamedTemporaryFile(mode="w",delete=False)
+        with _x as temporaryfile:
+            return temporaryfile
+
+class Luigi_Download_Tests(TestCase):
+
+    def test_S3Targets(self):
+
+        x = ContentImage
+        x.IMAGE_ROOT = "test_directory"
+        x.image = "testfile.file"
+
+        y = SavedModel
+        y.MODEL_ROOT = "test"
+        y.model = "test"
+
+        self.assertEqual(type(x.output(self)), S3Target)
+        self.assertEqual(type(y.output(self)), S3Target)
+
+    #TODO - implement tests for DownloadImage and DownloadModel
+    # my idea here would be to check that Luigi can open and read and write dummy
+    # files, however it is very difficult to implement
+
+    # def test_download_data(self):
+    #     x = DownloadModel(self)
+    #     x.input = sub_DownloadModel.requires(self)
+    #     x.output = sub_DownloadModel.output(self)
+    #     x.run()
+
 
 

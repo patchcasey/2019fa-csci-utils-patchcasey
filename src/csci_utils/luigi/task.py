@@ -1,5 +1,4 @@
 from luigi import LocalTarget
-import inspect
 
 class Requirement:
     def __init__(self, task_class, **params):
@@ -49,29 +48,10 @@ class Requires:
         """
         # Search task.__class__ for Requirement instances
         # return
-        # if task is self - raise error? handle?
+
         requirementlist = {}
-        y = task.__class__
-        print(y)
-
-        z = inspect.getmembers(y)
-        print(z)
-        for k, v in z:
-            if v is y.other:
-                print("'{}'".format(k),) #name of k, as a dict
-
-        # result = inspect.getattr_static(y, 'object')
-        # if type(result) in descriptor_types:
-        #     try:
-        #         result = result.__get__()
-
-        # x = [item for item
-        #      in inspect.getmembers(y)
-        #      if item[0]]# is y.other]
-        #
-        # print(x)
-
-
+        requirementlist = {k: getattr(task, k) for k in dir(task) if k == "other"}
+        return requirementlist
 
 
 class Requirement:

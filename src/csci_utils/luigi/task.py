@@ -50,6 +50,8 @@ class Requires:
         # return
 
         requirementlist = {}
+        test = getattr(Requirement, "__get__")(task, task.__class__)
+        print(test)
         requirementlist = {k: getattr(task, k) for k in dir(task) if k == "other"}
         return requirementlist
 
@@ -74,6 +76,7 @@ class TargetOutput:
         self.target_class = target_class
         self.file_pattern = file_pattern
         self.ext = ext
+        self.target_kwargs = target_kwargs
 
     def __get__(self, task, cls):
         if task is None:

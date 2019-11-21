@@ -21,6 +21,7 @@ class Luigi_Task_Requires_Test(TestCase):
             other = Requirement(OtherTask)
 
             def run(self):
+                x = MyTask
                 z = MyTask.requires.__call__(self)
                 requirement_taskname = z.get("other")
                 assert type(requirement_taskname) == OtherTask
@@ -35,6 +36,8 @@ class Luigi_Task_Requires_Test(TestCase):
                 output = TargetOutput(file_pattern=outputfilename, ext=".csv")
 
                 def run(self):
+                        x = TargetOutput
+                        print(x.__call__(self))
                         if self.output().path == outputfilename + ".csv":
                             return True
                         else:

@@ -215,6 +215,10 @@ class ParquetTarget(BaseDaskTarget):
     def _read(cls, path, **kwargs):
         return read_parquet(path, **kwargs)
 
+    @classmethod
+    def _write(cls, collection, path, **kwargs):
+        return collection.to_parquet(path, **kwargs)
+
 
 class CSVTarget(BaseDaskTarget):
     def __init__(self, path, glob="*.csv", flag=FLAG, storage_options=None):
@@ -224,7 +228,12 @@ class CSVTarget(BaseDaskTarget):
 
     @classmethod
     def _read(cls, path, **kwargs):
+        print(path)
         return read_csv(path, **kwargs)
 
+    @classmethod
+    def _write(cls, collection, path, **kwargs):
+        print(path)
+        return collection.to_csv(path, **kwargs)
 
 
